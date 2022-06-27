@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/Lakshit-Chiranjiv/wave-at-me-dapp/issues"
   },
-  "homepage": "https://github.com/Lakshit-Chiranjiv/wave-at-me-dapp#readme"
+  "homepage": "https://github.com/Lakshit-Chiranjiv/wave-at-me-dapp#readme",
+  "devDependencies": {
+    "hardhat": "^2.9.9"
+  }
 }
