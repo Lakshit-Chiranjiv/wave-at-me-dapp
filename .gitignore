@@ -1,2 +1,10 @@
 /node_modules
 /project_images
+.env
+coverage
+coverage.json
+typechain
+
+#Hardhat files
+cache
+artifacts
