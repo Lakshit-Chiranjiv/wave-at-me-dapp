@@ -12,6 +12,12 @@ function App() {
       <Header/>
       <Nav/>
       <WaveInput/>
+      <div className="pure-u-1 waveList">
+
+      </div>
+      <div className="pure-u-1 about">
+        
+      </div>
     </div>
   )
 }
