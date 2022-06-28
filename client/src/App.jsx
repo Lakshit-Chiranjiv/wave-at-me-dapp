@@ -1,14 +1,13 @@
 import { useState } from 'react'
 import './../node_modules/purecss/build/pure.css'
 import './App.css'
+import Header from './components/Header'
 
 function App() {
 
   return (
     <div className="pure-g App">
-      <div className="pure-u-1 heading">
-        <h1>Wave At ME Portal</h1>
-      </div>
+      <Header/>
       <div className="pure-u-1-2 pure-menu pure-menu-horizontal nav">
         <ul className="pure-menu-list">
         
