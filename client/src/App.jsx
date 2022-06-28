@@ -8,6 +8,7 @@ import WaveInput from './components/WaveInput'
 function App() {
 
   const [currentAccount,setCurrentAccount] = useState('')
+  const [connectionMessage,setConnectionMessage] = useState('')
 
   const checkWalletConnection = async () => {
     try {
@@ -25,6 +26,7 @@ function App() {
       if(accounts.length != 0){
         const userAccount = accounts[0]
         console.log("User connected and authorized with account : "+userAccount)
+        setConnectionMessage(userAccount+" connected")
         setCurrentAccount(userAccount)
       }
       else{
@@ -36,6 +38,28 @@ function App() {
     }
   }
 
+  const connectWallet = async () => {
+    try {
+      const { ethereum } = window;
+
+      if(!ethereum){
+        console.log("No Wallet found, Install Metamask")
+        setConnectionMessage("No Wallet found, Install Metamask")
+      }
+      else{
+        const accounts = await ethereum.request({ method: 'eth_requestAccounts' })
+        const userAccount = accounts[0]
+        console.log("Connected account : "+userAccount)
+        setConnectionMessage(userAccount+" connected")
+        setCurrentAccount(userAccount)
+      }
+    } catch (error) {
+      console.log(error)
+      setConnectionMessage("Some error occured")
+    }
+
+  }
+
   useEffect(()=>{
     checkWalletConnection()
   },[])
@@ -45,8 +69,8 @@ function App() {
       <Header/>
       <Nav/>
       <div className="pure-u-1 connectDiv">
-        <button className="pure-button pure-button-primary">Connect your Wallet 👛</button>
-        <p>Connection Message : </p>
+        <button className="pure-button pure-button-primary" onClick={connectWallet}>Connect your Wallet 👛</button>
+        <p>Connection Message : {connectionMessage}</p>
       </div>
       <WaveInput/>
       <div className="pure-u-1 waveList">
