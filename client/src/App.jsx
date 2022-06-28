@@ -9,7 +9,7 @@ function App() {
       <div className="pure-u-1 heading">
         <h1>Wave At ME Portal</h1>
       </div>
-      <div className="pure-u-1-2 pure-menu pure-menu-horizontal">
+      <div className="pure-u-1-2 pure-menu pure-menu-horizontal nav">
         <ul className="pure-menu-list">
         
         

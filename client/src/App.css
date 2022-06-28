@@ -3,3 +3,10 @@
   background-color: #d7effa;
 }
 
+.pure-menu-link:hover{
+  background-color: white;
+}
+
+.nav a{
+  border-radius: 10px;
+}
