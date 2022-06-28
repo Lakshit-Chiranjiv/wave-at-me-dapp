@@ -44,6 +44,10 @@ function App() {
     <div className="pure-g App">
       <Header/>
       <Nav/>
+      <div className="pure-u-1 connectDiv">
+        <button className="pure-button pure-button-primary">Connect your Wallet 👛</button>
+        <p>Connection Message : </p>
+      </div>
       <WaveInput/>
       <div className="pure-u-1 waveList">
 
