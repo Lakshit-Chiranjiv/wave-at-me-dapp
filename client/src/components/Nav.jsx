@@ -7,13 +7,13 @@ const Nav = () => {
         
         
         <li className="pure-menu-item">
-            <a href="#" className="pure-menu-link"><h3>See All Waves</h3></a>
+            <a href="#" className="pure-menu-link"><h3 className='myText'>See All Waves</h3></a>
         </li>
         <li className="pure-menu-item">
-            <a href="#" className="pure-menu-link"><h3>Lets Wave</h3></a>
+            <a href="#" className="pure-menu-link"><h3 className='myText'>Lets Wave</h3></a>
         </li>
         <li className="pure-menu-item">
-            <a href="#" className="pure-menu-link"><h3>About us</h3></a>
+            <a href="#" className="pure-menu-link"><h3 className='myText'>About us</h3></a>
         </li>
         </ul>
     </div>

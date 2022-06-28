@@ -1,6 +1,11 @@
 .App {
   text-align: center;
   background-color: #d7effa;
+  padding: 30px;
+}
+
+.myText{
+  font-family: 'Lato',sans-serif;
 }
 
 .pure-menu-link:hover{
