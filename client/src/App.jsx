@@ -69,7 +69,10 @@ function App() {
       <Header/>
       <Nav/>
       <div className="pure-u-1 connectDiv">
-        <button className="pure-button pure-button-primary" onClick={connectWallet}>Connect your Wallet 👛</button>
+        {
+          !currentAccount &&
+          <button className="pure-button pure-button-primary" onClick={connectWallet}>Connect your Wallet 👛</button>
+        }
         <p>Connection Message : {connectionMessage}</p>
       </div>
       <WaveInput/>
