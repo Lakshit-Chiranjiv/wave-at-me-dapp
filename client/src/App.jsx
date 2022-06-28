@@ -1,43 +1,29 @@
 import { useState } from 'react'
-import logo from './logo.svg'
+import './../node_modules/purecss/build/pure.css'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Hello Vite + React!</p>
-        <p>
-          <button type="button" onClick={() => setCount((count) => count + 1)}>
-            count is: {count}
-          </button>
-        </p>
-        <p>
-          Edit <code>App.jsx</code> and save to test HMR updates.
-        </p>
-        <p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-          {' | '}
-          <a
-            className="App-link"
-            href="https://vitejs.dev/guide/features.html"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Vite Docs
-          </a>
-        </p>
-      </header>
+    <div className="pure-g App">
+      <div className="pure-u-1 heading">
+        <h1>Wave At ME Portal</h1>
+      </div>
+      <div className="pure-u-1-2 pure-menu pure-menu-horizontal">
+        <ul className="pure-menu-list">
+        
+        
+          <li className="pure-menu-item">
+            <a href="#" className="pure-menu-link"><h3>See All Waves</h3></a>
+          </li>
+          <li className="pure-menu-item">
+            <a href="#" className="pure-menu-link"><h3>Lets Wave</h3></a>
+          </li>
+          <li className="pure-menu-item">
+            <a href="#" className="pure-menu-link"><h3>About us</h3></a>
+          </li>
+        </ul>
+      </div>
     </div>
   )
 }
