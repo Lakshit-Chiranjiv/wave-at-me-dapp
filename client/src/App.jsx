@@ -7,6 +7,7 @@ import WaveInput from './components/WaveInput'
 
 function App() {
 
+  const [currentAccount,setCurrentAccount] = useState('')
 
   const checkWalletConnection = async () => {
     try {
@@ -19,6 +20,16 @@ function App() {
         console.log("ethereum object doesn't exists, No wallet found")
       }
 
+      const accounts = await ethereum.request({ method: 'eth_accounts' })
+
+      if(accounts.length != 0){
+        const userAccount = accounts[0]
+        console.log("User connected and authorized with account : "+userAccount)
+        setCurrentAccount(userAccount)
+      }
+      else{
+        console.log("No user accounts connected or authorized")
+      }
 
     } catch (error) {
       console.log("Message : "+error)
