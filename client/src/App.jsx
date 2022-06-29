@@ -159,7 +159,7 @@ function App() {
         }
         <p>Connection Message : {connectionMessage}</p>
       </div>
-      <WaveInput waveHandler={waveHandler} setWaveMsg={setWaveMsg} waveBtnLoading={waveBtnLoading} setWaveBtnLoading={setWaveBtnLoading}/>
+      <WaveInput waveHandler={waveHandler} setWaveMsg={setWaveMsg} waveBtnLoading={waveBtnLoading} wavingLog={wavingLog}/>
       <div className="pure-u-1 waveList">
 
       </div>
