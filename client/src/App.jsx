@@ -55,6 +55,14 @@ function App() {
   
         let waveCount = await wavePortalContract.getTotalWaves()
         console.log("Total waves : "+waveCount.toNumber())
+
+        let waveTxn = await wavePortalContract.wave()
+        console.log("Mining wave txn : "+waveTxn.hash)
+        await waveTxn.wait()
+        console.log("Mined wave txn : "+waveTxn.hash)
+
+        waveCount = await wavePortalContract.getTotalWaves()
+        console.log("Total waves : "+waveCount.toNumber())
       }
       else{
         console.log("Ethereum object not found, Install Metamask")
