@@ -15,6 +15,7 @@ function App() {
 
   const [currentAccount,setCurrentAccount] = useState('')
   const [connectionMessage,setConnectionMessage] = useState('')
+  const [allWaves,setAllWaves] = useState([])
 
   const checkWalletConnection = async () => {
     try {
@@ -34,6 +35,7 @@ function App() {
         console.log("User connected and authorized with account : "+userAccount)
         setConnectionMessage(userAccount+" connected")
         setCurrentAccount(userAccount)
+        getAllWaves()
       }
       else{
         console.log("No user accounts connected or authorized")
@@ -56,7 +58,7 @@ function App() {
         let waveCount = await wavePortalContract.getTotalWaves()
         console.log("Total waves : "+waveCount.toNumber())
 
-        let waveTxn = await wavePortalContract.wave()
+        let waveTxn = await wavePortalContract.wave('some wave message')
         console.log("Mining wave txn : "+waveTxn.hash)
         await waveTxn.wait()
         console.log("Mined wave txn : "+waveTxn.hash)
@@ -88,12 +90,43 @@ function App() {
         console.log("Connected account : "+userAccount)
         setConnectionMessage(userAccount+" connected")
         setCurrentAccount(userAccount)
+        getAllWaves()
       }
     } catch (error) {
       console.log(error)
       setConnectionMessage("Some error occured")
     }
 
+  }
+
+  const getAllWaves = async () => {
+    try {
+      const { ethereum } = window
+
+      if(ethereum){
+        const provider = new ethers.providers.Web3Provider(ethereum)
+        const signer = provider.getSigner()
+        const wavePortalContract = new ethers.Contract(waveContractAddress,waveContractABI,signer)
+
+        const waveList = await wavePortalContract.getAllWaves()
+
+        const furnishedWaveList = waveList.map(wave => (
+          {
+            waver: wave.waver,
+            message: wave.message,
+            timestamp: new Date(wave.timestamp * 1000),
+          }
+        ))
+        console.log(furnishedWaveList)
+        setAllWaves(furnishedWaveList);
+      }
+      else{
+        console.log("Ethereum object not found, Install Metamask")
+      }
+
+    } catch (error) {
+        console.log("Some error occured : "+error)
+    }    
   }
 
   useEffect(()=>{
@@ -117,6 +150,17 @@ function App() {
       </div>
       <div className="pure-u-1 about">
         
+      </div>
+      <div className="pure-u-1 waveList">
+        {
+          allWaves.map((wave,i) => (
+            <div className="wave" key={i}>
+              <h4>{wave.waver}</h4>
+              <p>{wave.message}</p>
+              <p>{wave.timestamp.toString()}</p>
+            </div>
+          ))
+        }
       </div>
     </div>
   )
