@@ -20,7 +20,7 @@ function App() {
   const [allWaves,setAllWaves] = useState([])
   const [waveMsg,setWaveMsg] = useState('')
   const [wavingLog,setWavingLog] = useState('')
-  const [loading,setLoading] = useState(true)
+  const [listLoading,setListLoading] = useState(true)
 
   const checkWalletConnection = async () => {
     try {
@@ -130,7 +130,7 @@ function App() {
         ))
         console.log(furnishedWaveList)
         setAllWaves(furnishedWaveList.reverse())
-        setLoading(false)
+        setListLoading(false)
       }
       else{
         console.log("Ethereum object not found, Install Metamask")
@@ -166,10 +166,10 @@ function App() {
       <div className="pure-u-1 waveList">
         <h1 className='myText'>Waves List</h1>
         {
-          loading ?
+          listLoading ?
           <Loader/> :
           allWaves.map((wave,i) => (
-            <WaveBar key={Math.random()} wave={wave}/>
+            <WaveBar key={i} wave={wave}/>
           ))
         }
       </div>
