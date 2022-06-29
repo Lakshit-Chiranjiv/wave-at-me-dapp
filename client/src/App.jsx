@@ -125,7 +125,7 @@ function App() {
           }
         ))
         console.log(furnishedWaveList)
-        setAllWaves(furnishedWaveList);
+        setAllWaves(furnishedWaveList.reverse());
       }
       else{
         console.log("Ethereum object not found, Install Metamask")
