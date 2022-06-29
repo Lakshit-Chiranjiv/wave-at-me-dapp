@@ -16,8 +16,17 @@ contract WavePortal {
 
     Wave[] allWaves;
 
+    uint private seed;
+
     constructor() payable {
         console.log("Yo yo, I am a contract and I am smart");
+
+        uint instance1 = (block.timestamp * block.difficulty) % 1000;
+        uint instance2 = (block.timestamp + block.difficulty * 25) % 1000;
+        uint instance3 = (block.timestamp / block.difficulty) % 1000;
+        uint instance4 = (block.timestamp - block.difficulty) % 1000;
+
+        seed = (block.timestamp + instance1 * instance2 + instance3 - instance4 + block.difficulty) % 100;
     }
 
     uint totalWaves;
@@ -31,10 +40,18 @@ contract WavePortal {
         emit Waved(msg.sender,_message,block.timestamp);
 
         uint prize = 0.0001 ether;
-        require(address(this).balance >= prize,"Contract doesn't has enough ether to reward");
 
-        (bool success,) = (msg.sender).call{value: prize}("");
-        require(success,"Rewarding wasn't successfull");
+        uint inst1 = (block.timestamp * block.difficulty) % 1000;
+        uint inst2 = (block.timestamp * block.difficulty) % 1000;
+
+        seed = (inst1 + inst2 + block.timestamp + block.difficulty + seed) % 100;
+
+        if(seed < 50){
+            require(address(this).balance >= prize,"Contract doesn't has enough ether to reward");
+
+            (bool success,) = (msg.sender).call{value: prize}("");
+            require(success,"Rewarding wasn't successfull");
+        }
     }
 
     function getTotalWaves() public view returns(uint){
