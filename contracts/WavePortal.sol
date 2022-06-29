@@ -16,6 +16,8 @@ contract WavePortal {
 
     Wave[] allWaves;
 
+    mapping(address => uint) public lastWavedAt;
+
     uint private seed;
 
     constructor() payable {
@@ -32,6 +34,8 @@ contract WavePortal {
     uint totalWaves;
 
     function wave(string memory _message) public payable{
+        require(lastWavedAt[msg.sender] + 20 minutes < block.timestamp,"Wait 20 mins before next wave");
+        lastWavedAt[msg.sender] = block.timestamp;
         totalWaves += 1;
         console.log("%s has waved on portal with message : %s",msg.sender,_message);
 
@@ -46,8 +50,8 @@ contract WavePortal {
 
         seed = (inst1 + inst2 + block.timestamp + block.difficulty + seed) % 100;
 
+        console.log("random seed : %d",seed);
         if(seed < 50){
-            console.log("random seed : %d",seed);
             require(address(this).balance >= prize,"Contract doesn't has enough ether to reward");
 
             (bool success,) = (msg.sender).call{value: prize}("");
