@@ -35,4 +35,8 @@ contract WavePortal {
         console.log("Total Waves = %d",totalWaves);
         return totalWaves;
     }
+
+    function getAllWaves() public view returns(Wave[] memory){
+        return allWaves;
+    }
 }
