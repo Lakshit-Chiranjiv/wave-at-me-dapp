@@ -3,6 +3,7 @@ import { useState,useEffect } from 'react'
 import './../node_modules/purecss/build/pure.css'
 import './App.css'
 import Header from './components/Header'
+import Loader from './components/Loader'
 import Nav from './components/Nav'
 import WaveBar from './components/WaveBar'
 import WaveInput from './components/WaveInput'
@@ -18,6 +19,8 @@ function App() {
   const [connectionMessage,setConnectionMessage] = useState('')
   const [allWaves,setAllWaves] = useState([])
   const [waveMsg,setWaveMsg] = useState('')
+  const [wavingLog,setWavingLog] = useState('')
+  const [loading,setLoading] = useState(true)
 
   const checkWalletConnection = async () => {
     try {
@@ -126,7 +129,8 @@ function App() {
           }
         ))
         console.log(furnishedWaveList)
-        setAllWaves(furnishedWaveList.reverse());
+        setAllWaves(furnishedWaveList.reverse())
+        setLoading(false)
       }
       else{
         console.log("Ethereum object not found, Install Metamask")
@@ -162,12 +166,14 @@ function App() {
       <div className="pure-u-1 waveList">
         <h1 className='myText'>Waves List</h1>
         {
+          loading ?
+          <Loader/> :
           allWaves.map((wave,i) => (
             <WaveBar key={Math.random()} wave={wave}/>
           ))
         }
       </div>
-      <div className="lds-ripple"><div></div><div></div></div>
+      <Loader/>
     </div>
   )
 }
