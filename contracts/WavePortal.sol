@@ -16,13 +16,13 @@ contract WavePortal {
 
     Wave[] allWaves;
 
-    constructor() {
+    constructor() payable {
         console.log("Yo yo, I am a contract and I am smart");
     }
 
     uint totalWaves;
 
-    function wave(string memory _message) public{
+    function wave(string memory _message) public payable{
         totalWaves += 1;
         console.log("%s has waved on portal with message : %s",msg.sender,_message);
 
