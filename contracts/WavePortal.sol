@@ -8,15 +8,23 @@ contract WavePortal {
     
     event Waved(address indexed waver, string message, uint timestamp);
 
+    struct Wave{
+        address waver;
+        string message;
+        uint timestamp;
+    }
+
+    Wave[] allWaves;
+
     constructor() {
         console.log("Yo yo, I am a contract and I am smart");
     }
 
     uint totalWaves;
 
-    function wave() public{
+    function wave(string memory _message) public{
         totalWaves += 1;
-        console.log("%s has waved on portal",msg.sender);
+        console.log("%s has waved on portal with message : %s",msg.sender,_message);
     }
 
     function getTotalWaves() public view returns(uint){
