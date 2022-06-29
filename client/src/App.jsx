@@ -9,7 +9,7 @@ import WaveContractAbi from './utils/WaveContract.json'
 
 function App() {
 
-  const waveContractAddress = '0x00b40920a48571c9225B0f7d2A294558505f4014'
+  const waveContractAddress = '0xC4D8EFc70cc9BFD047C325FACA0d66E42d2925A0'
 
   const waveContractABI = WaveContractAbi.abi
 
