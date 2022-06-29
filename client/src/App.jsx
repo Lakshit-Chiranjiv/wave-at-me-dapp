@@ -161,8 +161,8 @@ function App() {
       <div className="pure-u-1 waveList">
         {
           allWaves.map((wave,i) => (
-            <div className="wave" key={i}>
-              <h4>{wave.waver}</h4>
+            <div className="wavebar" key={i}>
+              <h4>{wave.waver.slice(0,5)+"..."+wave.waver.slice(-4)}</h4>
               <p>{wave.message}</p>
               <p>{wave.timestamp.toDateString()+", "+wave.timestamp.toTimeString().slice(0,8)+" (IST)"}</p>
             </div>
