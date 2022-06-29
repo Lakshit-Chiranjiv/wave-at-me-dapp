@@ -1,11 +1,17 @@
+import { ethers } from 'ethers'
 import { useState,useEffect } from 'react'
 import './../node_modules/purecss/build/pure.css'
 import './App.css'
 import Header from './components/Header'
 import Nav from './components/Nav'
 import WaveInput from './components/WaveInput'
+import WaveContractAbi from './utils/WaveContract.json'
 
 function App() {
+
+  const waveContractAddress = '0x0e3aa99D659c9178b7c6dd93605dD45861bF808b'
+
+  const waveContractABI = WaveContractAbi.abi
 
   const [currentAccount,setCurrentAccount] = useState('')
   const [connectionMessage,setConnectionMessage] = useState('')
@@ -37,6 +43,28 @@ function App() {
       console.log("Message : "+error)
     }
   }
+
+  const waveHandler = async () => {
+    try {
+      const { ethereum } = window
+
+      if(ethereum){
+        const provider = new ethers.providers.Web3Provider(ethereum)
+        const signer = provider.getSigner()
+        const wavePortalContract = new ethers.Contract(waveContractAddress,waveContractABI,signer)
+  
+        let waveCount = await wavePortalContract.getTotalWaves()
+        console.log("Total waves : "+waveCount.toNumber())
+      }
+      else{
+        console.log("Ethereum object not found, Install Metamask")
+      }
+
+    } catch (error) {
+        console.log("Some error occured : "+error)
+    }
+  }
+
 
   const connectWallet = async () => {
     try {
@@ -75,7 +103,7 @@ function App() {
         }
         <p>Connection Message : {connectionMessage}</p>
       </div>
-      <WaveInput/>
+      <WaveInput waveHandler={waveHandler}/>
       <div className="pure-u-1 waveList">
 
       </div>
