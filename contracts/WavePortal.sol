@@ -27,6 +27,7 @@ contract WavePortal {
         uint instance4 = (block.timestamp - block.difficulty) % 1000;
 
         seed = (block.timestamp + instance1 * instance2 + instance3 - instance4 + block.difficulty) % 100;
+        console.log("random seed : %d",seed);
     }
 
     uint totalWaves;
