@@ -16,6 +16,7 @@ function App() {
   const [currentAccount,setCurrentAccount] = useState('')
   const [connectionMessage,setConnectionMessage] = useState('')
   const [allWaves,setAllWaves] = useState([])
+  const [waveMsg,setWaveMsg] = useState('')
 
   const checkWalletConnection = async () => {
     try {
@@ -51,20 +52,26 @@ function App() {
       const { ethereum } = window
 
       if(ethereum){
-        const provider = new ethers.providers.Web3Provider(ethereum)
-        const signer = provider.getSigner()
-        const wavePortalContract = new ethers.Contract(waveContractAddress,waveContractABI,signer)
-  
-        let waveCount = await wavePortalContract.getTotalWaves()
-        console.log("Total waves : "+waveCount.toNumber())
+        if(waveMsg.length>0){
+          const provider = new ethers.providers.Web3Provider(ethereum)
+          const signer = provider.getSigner()
+          const wavePortalContract = new ethers.Contract(waveContractAddress,waveContractABI,signer)
+    
+          let waveCount = await wavePortalContract.getTotalWaves()
+          console.log("Total waves : "+waveCount.toNumber())
 
-        let waveTxn = await wavePortalContract.wave('some wave message')
-        console.log("Mining wave txn : "+waveTxn.hash)
-        await waveTxn.wait()
-        console.log("Mined wave txn : "+waveTxn.hash)
+          let waveTxn = await wavePortalContract.wave(waveMsg)
+          console.log("Mining wave txn : "+waveTxn.hash)
+          await waveTxn.wait()
+          console.log("Mined wave txn : "+waveTxn.hash)
 
-        waveCount = await wavePortalContract.getTotalWaves()
-        console.log("Total waves : "+waveCount.toNumber())
+          waveCount = await wavePortalContract.getTotalWaves()
+          console.log("Total waves : "+waveCount.toNumber())
+          getAllWaves()
+        }
+        else{
+          console.log("No message entered")
+        }
       }
       else{
         console.log("Ethereum object not found, Install Metamask")
@@ -144,7 +151,7 @@ function App() {
         }
         <p>Connection Message : {connectionMessage}</p>
       </div>
-      <WaveInput waveHandler={waveHandler}/>
+      <WaveInput waveHandler={waveHandler} setWaveMsg={setWaveMsg}/>
       <div className="pure-u-1 waveList">
 
       </div>
