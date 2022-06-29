@@ -19,6 +19,9 @@ const main = async() => {
     let waveTxn;
     waveTxn = await waveContract.wave('Owner Message')
     await waveTxn.wait()
+    //to test cooldown
+    // waveTxn = await waveContract.wave('Owner Message 2')
+    // await waveTxn.wait()
 
     waveCount = await waveContract.getTotalWaves()
 
