@@ -27,7 +27,6 @@ contract WavePortal {
         uint instance4 = (block.timestamp - block.difficulty) % 1000;
 
         seed = (block.timestamp + instance1 * instance2 + instance3 - instance4 + block.difficulty) % 100;
-        console.log("random seed : %d",seed);
     }
 
     uint totalWaves;
@@ -48,6 +47,7 @@ contract WavePortal {
         seed = (inst1 + inst2 + block.timestamp + block.difficulty + seed) % 100;
 
         if(seed < 50){
+            console.log("random seed : %d",seed);
             require(address(this).balance >= prize,"Contract doesn't has enough ether to reward");
 
             (bool success,) = (msg.sender).call{value: prize}("");
