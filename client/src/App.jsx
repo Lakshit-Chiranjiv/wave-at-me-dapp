@@ -21,6 +21,7 @@ function App() {
   const [waveMsg,setWaveMsg] = useState('')
   const [wavingLog,setWavingLog] = useState('')
   const [listLoading,setListLoading] = useState(true)
+  const [waveBtnLoading,setWaveBtnLoading] = useState(false)
 
   const checkWalletConnection = async () => {
     try {
@@ -57,6 +58,7 @@ function App() {
 
       if(ethereum){
         if(waveMsg.length>0){
+          setWaveBtnLoading(true)
           const provider = new ethers.providers.Web3Provider(ethereum)
           const signer = provider.getSigner()
           const wavePortalContract = new ethers.Contract(waveContractAddress,waveContractABI,signer)
@@ -72,6 +74,7 @@ function App() {
           waveCount = await wavePortalContract.getTotalWaves()
           console.log("Total waves : "+waveCount.toNumber())
           getAllWaves()
+          setWaveBtnLoading(false)
         }
         else{
           console.log("No message entered")
@@ -156,7 +159,7 @@ function App() {
         }
         <p>Connection Message : {connectionMessage}</p>
       </div>
-      <WaveInput waveHandler={waveHandler} setWaveMsg={setWaveMsg}/>
+      <WaveInput waveHandler={waveHandler} setWaveMsg={setWaveMsg} waveBtnLoading={waveBtnLoading} setWaveBtnLoading={setWaveBtnLoading}/>
       <div className="pure-u-1 waveList">
 
       </div>
@@ -173,7 +176,6 @@ function App() {
           ))
         }
       </div>
-      <Loader/>
     </div>
   )
 }
