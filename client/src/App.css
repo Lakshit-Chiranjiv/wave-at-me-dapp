@@ -86,3 +86,48 @@
     opacity: 0;
   }
 }
+
+/* wave */
+.waveList {
+  margin: 20px 80px;
+}
+.wavebar{
+  padding: 12px;
+  background: rgba( 16, 169, 238, 0.2 );
+  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+  backdrop-filter: blur( 2.5px );
+  -webkit-backdrop-filter: blur( 2.5px );
+  border-radius: 10px;
+  border: 1px solid rgba( 255, 255, 255, 0.18 );
+  margin-bottom: 16px;
+  display: flex;
+  gap: 12px;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.wavebar .wavedAt{
+  font-size: 12px;
+  color: #787878;
+}
+
+.wavebar div{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: center;
+}
+
+.barleft h4{
+  color: #0077ff;
+  margin: 5px;
+}
+
+.barcentre p{
+  font-size: 18px;
+  margin: 6px;
+}
+
+.barright p{
+  margin: 6px;
+}
