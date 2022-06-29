@@ -4,6 +4,7 @@ import './../node_modules/purecss/build/pure.css'
 import './App.css'
 import Header from './components/Header'
 import Nav from './components/Nav'
+import WaveBar from './components/WaveBar'
 import WaveInput from './components/WaveInput'
 import WaveContractAbi from './utils/WaveContract.json'
 
@@ -159,17 +160,14 @@ function App() {
         
       </div>
       <div className="pure-u-1 waveList">
+        <h1 className='myText'>Waves List</h1>
         {
           allWaves.map((wave,i) => (
-            <div className="wavebar" key={i}>
-              <h4>{wave.waver.slice(0,5)+"..."+wave.waver.slice(-4)}</h4>
-              <p>{wave.message}</p>
-              <p>{wave.timestamp.toDateString()+", "+wave.timestamp.toTimeString().slice(0,8)+" (IST)"}</p>
-            </div>
+            <WaveBar key={Math.random()} wave={wave}/>
           ))
         }
       </div>
-      <div class="lds-ripple"><div></div><div></div></div>
+      <div className="lds-ripple"><div></div><div></div></div>
     </div>
   )
 }
